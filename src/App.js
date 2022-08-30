@@ -1,5 +1,5 @@
 import { MultiSelectComponent } from "@syncfusion/ej2-react-dropdowns";
-import { DataManager, WebApiAdaptor } from "@syncfusion/ej2-data";
+import { DataManager, WebApiAdaptor, Query } from "@syncfusion/ej2-data";
 import "./App.css";
 
 /* import the DropDownList dependency styles */
@@ -38,13 +38,17 @@ function App() {
     crossDomain: true,
   });
 
-  // const data: Query = new Query();
+  const dataQuery: Query = new Query()
+    .select(["FirstName", "EmployeeID"])
+    .take(10)
+    .requiresCount();
 
   return (
     <div className="multi-selecting">
       <MultiSelectComponent
         placeholder="Hello How Are You"
         dataSource={remoteData}
+        query={dataQuery}
         fields={{ value: "EmployeeID", text: "FirstName" }}
       ></MultiSelectComponent>
     </div>
